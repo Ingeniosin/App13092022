@@ -3,9 +3,9 @@ using App13092022.Utils;
 
 namespace App13092022.Algorithms; 
 
-public class Tree :Algorithm {
+public class Three :Algorithm {
 
-    public Tree() : base("Tercero", "Crea un programa que lea el contenido de un fichero de texto, lo almacene línea por línea en un ArrayList, lo ordene y lo muestre ordenado en pantalla.") {
+    public Three() : base("Tercero", "Crea un programa que lea el contenido de un fichero de texto, lo almacene línea por línea en un ArrayList, lo ordene y lo muestre ordenado en pantalla.") {
     }
 
     protected override void Execute() {

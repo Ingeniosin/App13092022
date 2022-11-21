@@ -1,72 +1,24 @@
 ﻿using System.Collections;
+using App13092022.Utils;
 
-namespace App300822.Algorithms; 
+namespace App13092022.Algorithms;
 
 public class One : Algorithm {
 
-    public One() : base("Punto 1", "Realizar un programa que use ArrayList de números reales. El programa debe permitir mostrar un menú donde se pueda agregar un número, buscar un número, modificar un número, eliminar un número e insertar un número en una posición dadaf") {
+    public One() : base("Primero", "Crea un programa que lea el contenido de un fichero de texto, lo almacene línea por línea en un ArrayList, y luego pregunte de forma repetitiva al usuario qué línea desea ver. Terminará cuando el usuario introduzca '-1'") {
     }
 
     protected override void Execute() {
-        
-        var numbers = new ArrayList();
-        
-        var whileLoop = true;
-        while (whileLoop) {
-            InputUtils.SelectFunction(new Dictionary<string, Action>
-            {
-                {
-                    "Agregar un número", () => {
-                        numbers.Add(InputUtils.GetNumber("Ingrese un número: "));
-                    }
-                },
-                {
-                    "Buscar un número", () => {
-                        var number = InputUtils.GetNumber("Ingrese un número: ");
-                        Console.WriteLine(numbers.Contains(number) ? "El número {0} se encuentra en la lista" : "El número {0} no se encuentra en la lista", number);
-                    }
-                },
-                {
-                    "Modificar un número", () => {
-                        var number = InputUtils.GetNumber("Ingrese un número: ");
-                        if (numbers.Contains(number)) {
-                            var index = numbers.IndexOf(number);
-                            numbers[index] = InputUtils.GetNumber("Ingrese el nuevo número");
-                        } else {
-                            Console.WriteLine("El número {0} no se encuentra en la lista", number);
-                        }
-                    }
-                },
-                {
-                    "Eliminar un número", () => {
-                        var number = InputUtils.GetNumber("Ingrese un número: ");
-                        if (numbers.Contains(number)) {
-                            numbers.Remove(number);
-                        } else {
-                            Console.WriteLine("El número {0} no se encuentra en la lista", number);
-                        }
-                    }
-                },
-                {
-                    "Insertar un número en una posición dada", () => {
-                        var number = InputUtils.GetNumber("Ingrese un número: ");
-                        var index = InputUtils.GetNumber("Ingrese la posición: ", x => x >= 0 && x <= numbers.Count);
-                        numbers.Insert(index, number);
-                    }
-                },
-                {
-                    "Salir", () => {
-                        whileLoop = false;
-                    }
-                }
-            
-            });
+        var lines = File.ReadAllLines(@"D:\Escritorio\Work\UCC\App13092022\Algorithms\file.txt");
+        var list = new ArrayList(lines);
+
+        var line = 0;
+        while (line != -1) {
+            line = InputUtils.GetNumber("Introduce el número de línea que quieres ver (-1 para salir)");
+            if (line != -1) 
+                Console.WriteLine(list[line - 1]);
         }
-        
-       
-        
-        
-        
-        
+
+
     }
 }
